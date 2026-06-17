@@ -74,7 +74,7 @@ echo "✅ Container alorea-service-${NEW_ENV} đang chạy!"
 # 5. Cập nhật Nginx trỏ sang container mới và reload (KHÔNG DOWNTIME)
 echo "[5/6] Cập nhật Nginx → port ${NEW_PORT}..."
 # ⚠️ Sửa đường dẫn file Nginx cho đúng với server của bạn
-NGINX_CONF="/etc/nginx/sites-available/perfume-client"
+NGINX_CONF="/etc/nginx/sites-available/alorea-service"
 
 if [ -f "$NGINX_CONF" ]; then
     sed -i "s/proxy_pass http:\/\/127.0.0.1:[0-9]*/proxy_pass http:\/\/127.0.0.1:${NEW_PORT}/g" $NGINX_CONF

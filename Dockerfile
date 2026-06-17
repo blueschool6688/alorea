@@ -114,8 +114,13 @@ COPY . .
 # tránh bị overwrite bởi COPY . . (lần trước copy 2 lần thừa)
 COPY --from=frontend-builder /app/public/build ./public/build
 
-# Set permissions
-RUN chown -R www-data:www-data storage bootstrap/cache \
+# Tạo thư mục storage framework (Blade compiler cần storage/framework/views)
+# Lưu ý: chỉ storage/app được mount volume, các thư mục này phải có sẵn trong image
+RUN mkdir -p storage/framework/views \
+            storage/framework/sessions \
+            storage/framework/cache/data \
+            storage/logs \
+    && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
 # ─── Config files ────────────────────────────────────────────────────────────
