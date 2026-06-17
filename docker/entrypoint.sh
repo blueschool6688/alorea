@@ -29,18 +29,5 @@ php artisan route:cache
 # Cache views — chỉ chạy nếu có views, bỏ qua nếu lỗi
 echo "🖼  Caching views..."
 php artisan view:cache || echo "⚠️  View cache skipped (no views or path not found)"
-
-# Run database migrations (only if DB is reachable)
-if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
-    echo "🗃️  Running migrations..."
-    php artisan migrate --force --no-interaction
-fi
-
-# Create storage link if not exists
-if [ ! -L /var/www/html/public/storage ]; then
-    echo "🔗 Creating storage symlink..."
-    php artisan storage:link
-fi
-
 echo "✅ Application ready. Starting services..."
 exec "$@"
