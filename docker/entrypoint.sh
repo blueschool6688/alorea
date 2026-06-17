@@ -9,14 +9,6 @@ if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force
 fi
 
-# Tạo thư mục storage cần thiết nếu chưa có (quan trọng khi dùng volume)
-echo "📁 Ensuring storage directories exist..."
-mkdir -p storage/framework/views \
-         storage/framework/sessions \
-         storage/framework/cache/data \
-         storage/logs \
-         storage/app/public
-
 # Đặt lại permission sau khi mkdir (volume mount có thể thay đổi owner)
 chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
 chmod -R 775 storage bootstrap/cache 2>/dev/null || true
