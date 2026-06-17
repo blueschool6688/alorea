@@ -8,7 +8,7 @@ pipeline {
         IMAGE_TAG         = "${env.BUILD_NUMBER}"
         IMAGE_NAME        = credentials('perfume-image-name')
         IP_SERVER         = credentials('server-ip')
-        SERVER_SSH_DEPLOY = credentials('server-ssh-key')
+        SERVER_SSH_DEPLOY = 'server-ssh-key'   // Credential ID — không phải secret, giữ plain string
     }
 
     stages {
