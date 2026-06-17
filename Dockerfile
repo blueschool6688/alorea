@@ -55,6 +55,18 @@ RUN apk add --no-cache \
         nginx \
         supervisor \
         curl \
+        # Runtime libraries — kept at runtime
+        libpng \
+        libjpeg-turbo \
+        libwebp \
+        libzip \
+        oniguruma \
+        freetype \
+        icu-libs \
+        gmp \
+        # ffmpeg for spatie/laravel-medialibrary
+        ffmpeg \
+        # Dev headers — only needed for compilation
         libpng-dev \
         libjpeg-turbo-dev \
         libwebp-dev \
@@ -63,8 +75,6 @@ RUN apk add --no-cache \
         freetype-dev \
         icu-dev \
         gmp-dev \
-        # Required by spatie/laravel-medialibrary
-        ffmpeg \
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
@@ -80,9 +90,7 @@ RUN apk add --no-cache \
         gmp \
         pcntl \
         exif \
-    # Install OPcache (built-in, không cần apk thêm)
-    && docker-php-ext-install opcache \
-    # Xoá build deps để giảm image size
+        opcache \
     && apk del --no-cache \
         libpng-dev \
         libjpeg-turbo-dev \

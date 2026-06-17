@@ -9,11 +9,26 @@ if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force
 fi
 
+# Tạo thư mục storage cần thiết nếu chưa có (quan trọng khi dùng volume)
+echo "📁 Ensuring storage directories exist..."
+mkdir -p storage/framework/views \
+         storage/framework/sessions \
+         storage/framework/cache/data \
+         storage/logs \
+         storage/app/public
+
+# Đặt lại permission sau khi mkdir (volume mount có thể thay đổi owner)
+chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
+chmod -R 775 storage bootstrap/cache 2>/dev/null || true
+
 # Cache configuration for production
-echo "📦 Caching config, routes and views..."
+echo "📦 Caching config and routes..."
 php artisan config:cache
 php artisan route:cache
-php artisan view:cache
+
+# Cache views — chỉ chạy nếu có views, bỏ qua nếu lỗi
+echo "🖼  Caching views..."
+php artisan view:cache || echo "⚠️  View cache skipped (no views or path not found)"
 
 # Run database migrations (only if DB is reachable)
 if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
