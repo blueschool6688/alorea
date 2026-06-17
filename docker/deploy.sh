@@ -47,7 +47,7 @@ docker rm -f alorea-service-${NEW_ENV} 2>/dev/null || true
 
 docker run -d \
     --name alorea-service-${NEW_ENV} \
-    --env-file /serect/alorea-env \
+    --env-file serect/alorea-env \
     --restart unless-stopped \
     -p ${NEW_PORT}:80 \
     -v alorea_storage:/var/www/html/storage/app \
