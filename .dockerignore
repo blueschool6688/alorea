@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node
+node_modules
+
+# Laravel
+vendor
+storage/logs
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
+bootstrap/cache/*.php
+
+# Vite build output (will be re-built in Docker)
+public/build
+public/hot
+
+# Docker files (avoid recursion)
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# Development files
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.idea
+.vscode
+*.iml
+.DS_Store
+Thumbs.db
+
+# Tests
+tests
+phpunit.xml
+.phpunit.cache
+
+# CI
+.github
+.gitlab-ci.yml
+
+# Docs
+README.md
+CHANGELOG.md
