@@ -20,7 +20,7 @@ RUN npm run build
 # 2. PHP / Nginx Final Stage
 # ==========================================
 FROM php:8.3.9-fpm-alpine3.20 AS base
-WORKDIR /app
+WORKDIR /var/www/html
 
 # Install Nginx, Supervisor, Composer & PHP extensions
 COPY --from=composer:2.8.3 /usr/bin/composer /usr/bin/composer
@@ -69,7 +69,7 @@ COPY docker/supervisor/supervisord.conf /etc/supervisord.conf
 RUN mkdir -p storage/logs storage/framework/{sessions,views,cache} \
     && chmod -R 777 storage bootstrap/cache \
     && chmod -R 777 storage \
-    && chown -R www-data:www-data /app
+    && chown -R www-data:www-data /var/www/html
 
 # Ensure we expose port 80 to Caprover
 EXPOSE 80
