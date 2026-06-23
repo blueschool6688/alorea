@@ -62,8 +62,8 @@ COPY --from=frontend-builder /app/public/build ./public/build
 RUN composer dump-autoload --optimize
 
 # Setup Nginx and Supervisor Configs
-COPY nginx.app.conf /etc/nginx/http.d/default.conf
-COPY supervisord.conf /etc/supervisord.conf
+COPY docker/nginx/default.conf /etc/nginx/http.d/default.conf
+COPY docker/supervisor/supervisord.conf /etc/supervisord.conf
 
 # Permissions
 RUN mkdir -p storage/logs storage/framework/{sessions,views,cache} \
