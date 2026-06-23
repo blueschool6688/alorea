@@ -66,9 +66,8 @@ COPY docker/nginx/default.conf /etc/nginx/http.d/default.conf
 COPY docker/supervisor/supervisord.conf /etc/supervisord.conf
 
 # Permissions
-RUN mkdir -p storage/logs storage/framework/{sessions,views,cache} \
+RUN mkdir -p storage/logs storage/framework/sessions storage/framework/views storage/framework/cache \
     && chmod -R 777 storage bootstrap/cache \
-    && chmod -R 777 storage \
     && chown -R www-data:www-data /var/www/html
 
 # Ensure we expose port 80 to Caprover
