@@ -47,3 +47,8 @@ phpunit.xml
 # Docs
 README.md
 CHANGELOG.md
+# Extra ignores
+vendor/
+storage/app/
+public/build/
+public/hot
