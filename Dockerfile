@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 
 # Install Node dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy all source files to build the assets
 COPY . .
